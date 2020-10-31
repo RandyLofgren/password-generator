@@ -6,19 +6,29 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
     passwordLength = prompt("Please select a password length from 8 to 128 characters by writing the number in this prompt.");
     if (Number.isInteger(parseInt(passwordLength))) {
-        if (parseInt(passwordLength)>7){
-            if(parseInt(passwordLength)<129){
+        if (parseInt(passwordLength) > 7) {
+            if (parseInt(passwordLength) < 129) {
                 alert("Your password will be " + passwordLength + " characters long!")
-            }else {writePassword()}
+            } else { writePassword() }
 
-        }else{writePassword()}
-           
+        } else { writePassword() }
+
     }
     else {
         writePassword()
     }
-    numberPromt = prompt("Would you like numbers used in your password? Answer yes or no")
+    numberPrompt = prompt("Would you like numbers used in your password? \n Answer 'yes' or 'no'");
+    lowerPrompt = prompt("Would you like lowercase letters used in your password? \n Answer 'yes' or 'no'")
+    upperPrompt = prompt("Would you like uppercase letters used in your password? \n Answer 'yes' or 'no'")
+    specialPrompt = prompt("Would you like special characters used in your password? \n Answer 'yes' or 'no'")
+    if (numberPrompt.toLowerCase() === "yes") {
+        
 
+    }
+    else {
+        alert("Your password will NOT contain Numbers")
+    }
+  
 
 
     var password = generatePassword();
