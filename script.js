@@ -6,14 +6,14 @@ var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 var characters = ["!", "@", "#", "$", "%", "^", "&", "*"]
 var characterArray = []
 var makeSure = []
-
 // Write password to the #password input
-function writePassword() {
+function writePassword() {  // making sure the password length is a valid input
     passwordLength = prompt("Please select a password length from 8 to 128 characters by writing the number in this prompt.");
     if (Number.isInteger(parseInt(passwordLength))) {
         if (parseInt(passwordLength) > 7) {
             if (parseInt(passwordLength) < 129) {
                 alert("Your password will be " + passwordLength + " characters long!")
+                characterPick()
             } else { writePassword() }
 
         } else { writePassword() }
@@ -22,108 +22,53 @@ function writePassword() {
     else {
         writePassword()
     }
-    numberPrompt = prompt("Would you like numbers used in your password? \n Answer 'yes' if so.");
-    lowerPrompt = prompt("Would you like lowercase letters used in your password? \n Answer 'yes' if so.")
-    upperPrompt = prompt("Would you like uppercase letters used in your password? \n Answer 'yes' if so.")
-    specialPrompt = prompt("Would you like special characters used in your password? \n Answer 'yes' if so.")
-    if (numberPrompt.toLowerCase() !== "yes") {
-        if (lowerPrompt.toLowerCase() !== "yes") {
-            if (upperPrompt.toLowerCase() !== "yes") {
-                if (specialPrompt.toLowerCase() !== "yes") {
-                    alert("You must pick at least 1 type of character! \n Please Start Over")
-                    writePassword()
-                } else { alert("Thank You!") }
-            } else { alert("Thank You!") }
-        } else { alert("Thank You!") }
-    } else { alert("Thank You!") }
-
-
-    if (numberPrompt.toLowerCase() === "yes") {
-        if (lowerPrompt.toLowerCase() === "yes") {
-            if (upperPrompt.toLowerCase() === "yes") {  //responses to  prompt about which characters to use   N=number  L=lower U=Upper S=special
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = numbers.concat(lowerCase.concat(upperCase.concat(characters))); //N,L,U,,S yes
-                } else { characterArray = numbers.concat(lowerCase.concat(upperCase)); }// N,L,U yes
-            } else {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = numbers.concat(lowerCase.concat(characters)); //N,L,S yes
-                } else (characterArray = numbers.concat(lowerCase)); //N,L yes
-            }
-        } else {
-            if (upperPrompt.toLowerCase() === "yes") {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = numbers.concat(upperCase.concat(characters)); //N,U,S yes
-                } else { characterArray = numbers.concat(upperCase) } //N,U yes
-            } else {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = numbers.concat(characters); //N,S yes
-                } else { characterArray = numbers } //N yes
-            }
-        }
-    } else {
-        if (lowerPrompt.toLowerCase() === "yes") {
-            if (upperPrompt.toLowerCase() === "yes") {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = lowerCase.concat(upperCase.concat(characters)); //L,U,S yes 
-                } else { characterArray = lowerCase.concat(upperCase); }// L,U yes 
-            } else {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = lowerCase.concat(characters); //L,S yes 
-                } else (characterArray = lowerCase); //L 
-            }
-        } else {
-            if (upperPrompt.toLowerCase() === "yes") {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = upperCase.concat(characters); //U,S yes   
-                } else { characterArray = upperCase } //U yes
-            } else {
-                if (specialPrompt.toLowerCase() === "yes") {
-                    characterArray = characters; //S yes
-                } else { alert("This line is meaningless") } //Not Needed???
-            }
-        }
-    }
-
-
-
-
-
-    var passwordCharacters = []
-    for (var i = 0; i < passwordLength; i++) {
-        var character = characterArray[Math.floor(Math.random() * characterArray.length)]
-        passwordCharacters.push(character)
-    }
-    passwordCharacters = passwordCharacters.join('')
-
-
-
-
-
-
-    alert(passwordCharacters)
 
   
 
 
 
+    function characterPick() {  //confirming criteria selection and selecting with arrays to add to master array
+        characterArray = []
+        if (confirm("would you like uppercase letters")) {
+            characterArray = characterArray.concat(upperCase)
+            makeSure.push(upperCase[Math.floor(Math.random() * upperCase.length)])
+        }
+        if (confirm("would you like lowercase letters")) {
+            characterArray = characterArray.concat(lowerCase)
+            makeSure.push(lowerCase[Math.floor(Math.random() * lowerCase.length)])
+        }
 
+        if (confirm("would you like numbers")) {
+            characterArray = characterArray.concat(numbers)
+            makeSure.push(numbers[Math.floor(Math.random() * numbers.length)])
+        }
+        if (confirm("would you like special characters")) {
+            characterArray = characterArray.concat(characters)
+            makeSure.push(characters[Math.floor(Math.random() * characters.length)])
+        }
+        if (characterArray.length > 1) {
+            var passwordCharacters = []
+            for (var i = 0; i < passwordLength; i++) { //filling array with random password
+                var character = characterArray[Math.floor(Math.random() * characterArray.length)]
+                passwordCharacters.push(character)
+            }
+            for (let k = 0; k < makeSure.length; k++) {
+           //makes sure all character types are included by replacing first 1-4 based on number of criteria selected
+                passwordCharacters[k] = makeSure[k]
 
-
-
-
-    var password = generatePassword();
-    var passwordCharacters = document.querySelector("#password");
-
-
-
-    passwordCharacters = password;
-    
-    
-
+            }
+            passwordCharacters = passwordCharacters.join('')
+            
+            
+            var passDom = document.getElementById("password")
+            passDom.value = passwordCharacters
+        }
+        else {
+            alert("must pick one character type")
+            characterPick()
+        }
+    }
 }
 
-// Add event listener to generate button
+// return passwordCharacters
 generateBtn.addEventListener("click", writePassword);
-
-
-
