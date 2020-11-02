@@ -4,7 +4,8 @@ var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"
 var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"]
 var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 var characters = ["!", "@", "#", "$", "%", "^", "&", "*"]
-
+var characterArray = []
+var makeSure = []
 
 // Write password to the #password input
 function writePassword() {
@@ -89,10 +90,15 @@ function writePassword() {
 
     var passwordCharacters = []
     for (var i = 0; i < passwordLength; i++) {
-        var character = characterArray[Math.floor(Math.random() * passwordLength)]
+        var character = characterArray[Math.floor(Math.random() * characterArray.length)]
         passwordCharacters.push(character)
     }
     passwordCharacters = passwordCharacters.join('')
+
+
+
+
+
 
     alert(passwordCharacters)
 
@@ -106,19 +112,18 @@ function writePassword() {
 
 
     var password = generatePassword();
-    var passwordText = document.querySelector("#password");
+    var passwordCharacters = document.querySelector("#password");
 
 
 
-    passwordText.value = password;
+    passwordCharacters = password;
+    
     
 
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
 
 
 
