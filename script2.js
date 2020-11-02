@@ -58,8 +58,7 @@ function writePassword() {
 
             }
             passwordCharacters = passwordCharacters.join('')
-            alert(makeSure)
-            alert(passwordCharacters)
+            
             
             var passDom = document.getElementById("password")
             passDom.value = passwordCharacters
