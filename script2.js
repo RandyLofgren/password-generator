@@ -7,7 +7,7 @@ var characters = ["!", "@", "#", "$", "%", "^", "&", "*"]
 var characterArray = []
 var makeSure = []
 // Write password to the #password input
-function writePassword() {
+function writePassword() {  // making sure the password length is a valid input
     passwordLength = prompt("Please select a password length from 8 to 128 characters by writing the number in this prompt.");
     if (Number.isInteger(parseInt(passwordLength))) {
         if (parseInt(passwordLength) > 7) {
@@ -27,7 +27,7 @@ function writePassword() {
 
 
 
-    function characterPick() {
+    function characterPick() {  //confirming criteria selection and selecting with arrays to add to master array
         characterArray = []
         if (confirm("would you like uppercase letters")) {
             characterArray = characterArray.concat(upperCase)
@@ -48,12 +48,12 @@ function writePassword() {
         }
         if (characterArray.length > 1) {
             var passwordCharacters = []
-            for (var i = 0; i < passwordLength; i++) {
+            for (var i = 0; i < passwordLength; i++) { //filling array with random password
                 var character = characterArray[Math.floor(Math.random() * characterArray.length)]
                 passwordCharacters.push(character)
             }
             for (let k = 0; k < makeSure.length; k++) {
-           
+           //makes sure all character types are included by replacing first 1-4 based on number of criteria selected
                 passwordCharacters[k] = makeSure[k]
 
             }
