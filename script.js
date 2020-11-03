@@ -23,7 +23,7 @@ function writePassword() {  // making sure the password length is a valid input
         writePassword()
     }
 
-  
+
 
 
 
@@ -53,13 +53,13 @@ function writePassword() {  // making sure the password length is a valid input
                 passwordCharacters.push(character)
             }
             for (let k = 0; k < makeSure.length; k++) {
-           //makes sure all character types are included by replacing first 1-4 based on number of criteria selected
+                //makes sure all character types are included by replacing first 1-4 based on number of criteria selected
                 passwordCharacters[k] = makeSure[k]
 
             }
             passwordCharacters = passwordCharacters.join('')
-            
-            
+
+
             var passDom = document.getElementById("password")
             passDom.value = passwordCharacters
         }
